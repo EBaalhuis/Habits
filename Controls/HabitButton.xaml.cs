@@ -97,7 +97,7 @@ public partial class HabitButton : ContentView
         try
         {
             var entry = await DataAccess.GetHabitEntry(Habit, Date);
-            return entry ?? throw new InvalidOperationException("Entry not found");
+            return entry ?? new HabitEntry { Habit = Habit, Date = Date };
         }
         catch (Exception ex)
         {
