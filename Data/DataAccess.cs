@@ -61,4 +61,18 @@ public class DataAccess
         if (Database is null) throw new InvalidOperationException("Database init failed");
         return await Database.DeleteAsync(entry);
     }
+
+    public async Task<Dictionary<DateTime, List<HabitEntry>>> GetEntriesPerDate()
+    {
+        await Init();
+        if (Database is null) throw new InvalidOperationException("Database init failed");
+
+        var enabledEntries = await Database.Table<HabitEntry>()
+            .Where(entry => entry.Enabled)
+            .ToListAsync();
+
+        return enabledEntries
+            .GroupBy(entry => entry.Date)
+            .ToDictionary(group => group.Key, group => group.ToList());
+    }
 }
