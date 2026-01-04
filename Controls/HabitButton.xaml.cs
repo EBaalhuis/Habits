@@ -11,6 +11,8 @@ public partial class HabitButton : ContentView
         InnerButton.BindingContext = this;
     }
 
+    public static event EventHandler? Toggled;
+
     public static readonly BindableProperty HabitProperty = BindableProperty.Create(
         nameof(Habit),
         typeof(string),
@@ -90,6 +92,7 @@ public partial class HabitButton : ContentView
         }
 
         UpdateButton();
+        Toggled?.Invoke(this, EventArgs.Empty);
     }
 
     private async Task<HabitEntry> GetEntryFromDatabase()

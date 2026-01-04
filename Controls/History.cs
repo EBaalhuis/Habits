@@ -27,6 +27,20 @@ public partial class History : ContentView
 	protected override void OnParentSet()
 	{
 		base.OnParentSet();
+
+		if (Parent is not null)
+		{
+			HabitButton.Toggled += OnHabitButtonToggled;
+			_ = LoadAndRenderHistoricalDaysAsync();
+		}
+		else
+		{
+			HabitButton.Toggled -= OnHabitButtonToggled;
+		}
+	}
+
+	private void OnHabitButtonToggled(object? sender, EventArgs e)
+	{
 		_ = LoadAndRenderHistoricalDaysAsync();
 	}
 
