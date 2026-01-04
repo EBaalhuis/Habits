@@ -10,6 +10,7 @@
             Spacing="25">
 
             <DatePicker x:Name="DatePicker" />
+            
             <controls:HabitButton HabitName="Gym" 
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
             <controls:HabitButton HabitName="Work at home" 
@@ -19,10 +20,7 @@
 
             <controls:History />
 
-            <Label
-                Text="v0.2"
-                FontSize="10"
-                HorizontalOptions="Center" />
+            <Label Text="v0.2" FontSize="10" HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 
