@@ -23,6 +23,18 @@ public partial class HabitButton : ContentView
         set => SetValue(HabitProperty, value);
     }
 
+    public static readonly BindableProperty DateProperty = BindableProperty.Create(
+        nameof(Date),
+        typeof(DateTime),
+        typeof(HabitButton),
+        default(DateTime));
+
+    public DateTime Date
+    {
+        get => ((DateTime)GetValue(DateProperty)).Date;
+        set => SetValue(DateProperty, value);
+    }
+
     public required DataAccess DataAccess { get; set; } = new();
 
     static Color ToggledOnColor => Colors.Orange;
