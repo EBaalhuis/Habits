@@ -27,7 +27,8 @@ public partial class HabitButton : ContentView
         nameof(Date),
         typeof(DateTime),
         typeof(HabitButton),
-        default(DateTime));
+        default(DateTime),
+        propertyChanged: OnDateChanged);
 
     public DateTime Date
     {
@@ -42,30 +43,67 @@ public partial class HabitButton : ContentView
 
     private HabitEntry Entry { get; set; } = new();
 
-    protected override async void OnParentSet()
+    protected override void OnParentSet()
     {
         base.OnParentSet();
+        _ = LoadEntry();
+    }
 
-        if (string.IsNullOrEmpty(Habit)) return;
+    private static void OnDateChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is HabitButton button)
+        {
+            _ = button.LoadEntry();
+        }
+    }
 
+    private void OnButtonClicked(object? sender, EventArgs e)
+    {
+        _ = ToggleAndSaveAsync();
+    }
+
+    private async Task LoadEntry()
+    {
         try
         {
-            var entry = await DataAccess.GetHabitEntry(Habit, Date);
-            Entry = entry ?? new HabitEntry { Habit = Habit, Date = Date };
+            if (string.IsNullOrEmpty(Habit)) return;
+            Entry = await GetEntryFromDatabase();
+            UpdateButton();
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Error loading habit entry: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"Load entry error: {ex.Message}");
+        }
+    }
+
+    private async Task ToggleAndSaveAsync()
+    {
+        Entry.Enabled = !Entry.Enabled;
+
+        try
+        {
+            await DataAccess.SaveHabitEntry(Entry);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error saving habit entry: {ex.Message}");
         }
 
         UpdateButton();
     }
 
-    private async void OnButtonClicked(object? sender, EventArgs e)
+    private async Task<HabitEntry> GetEntryFromDatabase()
     {
-        Entry.Enabled = !Entry.Enabled;
-        UpdateButton();
-        await DataAccess.SaveHabitEntry(Entry);
+        try
+        {
+            var entry = await DataAccess.GetHabitEntry(Habit, Date);
+            return entry ?? throw new InvalidOperationException("Entry not found");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error retrieving habit entry: {ex.Message}");
+            return new HabitEntry { Habit = Habit, Date = Date };
+        }
     }
 
     private void UpdateButton()

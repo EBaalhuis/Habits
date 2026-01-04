@@ -9,10 +9,13 @@
             Padding="30,0"
             Spacing="25">
 
-            <DatePicker x:Name="DatePicker" Date="2026-01-05" />
-            <controls:HabitButton Habit="Gym" Date="2026-01-05" />
-            <controls:HabitButton Habit="Work at home" Date="2026-01-05" />
-            <controls:HabitButton Habit="Work at office" Date="2026-01-05" />
+            <DatePicker x:Name="DatePicker" />
+            <controls:HabitButton Habit="Gym" 
+                                  Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
+            <controls:HabitButton Habit="Work at home" 
+                                  Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
+            <controls:HabitButton Habit="Work at office" 
+                                  Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
         </VerticalStackLayout>
     </ScrollView>
 
