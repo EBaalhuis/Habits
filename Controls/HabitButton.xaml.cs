@@ -40,7 +40,7 @@ public partial class HabitButton : ContentView
     static Color ToggledOnColor => Colors.Orange;
     static Color ToggledOffColor => Colors.Black;
 
-    private HabitEntry Entry { get; set; } = new HabitEntry { Habit = string.Empty, Date = new DateTime(2026, 01, 04) };
+    private HabitEntry Entry { get; set; } = new();
 
     protected override async void OnParentSet()
     {
@@ -50,8 +50,8 @@ public partial class HabitButton : ContentView
 
         try
         {
-            var entry = await DataAccess.GetHabitEntryByHabit(Habit);
-            Entry = entry ?? new HabitEntry { Habit = Habit, Date = DateTime.Now };
+            var entry = await DataAccess.GetHabitEntry(Habit, Date);
+            Entry = entry ?? new HabitEntry { Habit = Habit, Date = Date };
         }
         catch (Exception ex)
         {
