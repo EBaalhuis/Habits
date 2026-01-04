@@ -16,6 +16,11 @@
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
             <controls:HabitButton Habit="Work at office" 
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
+
+            <Label
+                Text="v0.1"
+                FontSize="10"
+                HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 
