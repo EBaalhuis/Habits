@@ -1,7 +1,4 @@
-﻿using Habits.Data;
-using Habits.Models;
-
-namespace Habits;
+﻿namespace Habits;
 
 public partial class MainPage : ContentPage
 {
