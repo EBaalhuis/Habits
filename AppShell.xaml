@@ -6,9 +6,15 @@
     xmlns:local="clr-namespace:Habits"
     Title="Habits">
 
-    <ShellContent
-        Title="Habits"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Entries"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
 
+        <ShellContent
+            Title="Habits"
+            ContentTemplate="{DataTemplate local:Pages.HabitsPage}"
+            Route="Habits" />
+    </TabBar>
 </Shell>
