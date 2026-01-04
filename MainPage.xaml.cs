@@ -2,22 +2,20 @@
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
-
     public MainPage()
     {
         InitializeComponent();
     }
 
-    private void OnCounterClicked(object? sender, EventArgs e)
+    static Color ToggledOnColor => Colors.Orange;
+    static Color ToggledOffColor => Colors.Black;
+
+
+    bool GymToggled = false;
+
+    private void OnGymClicked(object? sender, EventArgs e)
     {
-        count++;
-
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        GymToggled = !GymToggled;
+        GymBtn.BorderColor = GymToggled ? ToggledOnColor : ToggledOffColor;
     }
 }
