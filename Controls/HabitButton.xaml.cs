@@ -14,12 +14,12 @@ public partial class HabitButton : ContentView
     public static event EventHandler? Toggled;
 
     public static readonly BindableProperty HabitProperty = BindableProperty.Create(
-        nameof(Habit),
+        nameof(HabitName),
         typeof(string),
         typeof(HabitButton),
         default(string));
 
-    public string Habit
+    public string HabitName
     {
         get => (string)GetValue(HabitProperty);
         set => SetValue(HabitProperty, value);
@@ -68,7 +68,7 @@ public partial class HabitButton : ContentView
     {
         try
         {
-            if (string.IsNullOrEmpty(Habit)) return;
+            if (string.IsNullOrEmpty(HabitName)) return;
             Entry = await GetEntryFromDatabase();
             UpdateButton();
         }
@@ -99,13 +99,13 @@ public partial class HabitButton : ContentView
     {
         try
         {
-            var entry = await DataAccess.GetHabitEntry(Habit, Date);
-            return entry ?? new HabitEntry { Habit = Habit, Date = Date };
+            var entry = await DataAccess.GetHabitEntry(HabitName, Date);
+            return entry ?? new HabitEntry { HabitName = HabitName, Date = Date };
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Error retrieving habit entry: {ex.Message}");
-            return new HabitEntry { Habit = Habit, Date = Date };
+            return new HabitEntry { HabitName = HabitName, Date = Date };
         }
     }
 

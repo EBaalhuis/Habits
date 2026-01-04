@@ -10,11 +10,11 @@
             Spacing="25">
 
             <DatePicker x:Name="DatePicker" />
-            <controls:HabitButton Habit="Gym" 
+            <controls:HabitButton HabitName="Gym" 
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
-            <controls:HabitButton Habit="Work at home" 
+            <controls:HabitButton HabitName="Work at home" 
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
-            <controls:HabitButton Habit="Work at office" 
+            <controls:HabitButton HabitName="Work at office" 
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
 
             <controls:History />

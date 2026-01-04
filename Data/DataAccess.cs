@@ -35,7 +35,7 @@ public class DataAccess
         if (Database is null) throw new InvalidOperationException("Database init failed");
 
         return await Database.Table<HabitEntry>()
-            .Where(rec => rec.Habit == habit)
+            .Where(rec => rec.HabitName == habit)
             .Where(rec => rec.Date == date)
             .FirstOrDefaultAsync();
     }
