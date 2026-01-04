@@ -13,6 +13,7 @@
                 Text="Gym" 
                 Clicked="OnGymClicked"
                 BorderWidth="2"
+                BorderColor="Black"
                 HorizontalOptions="Start" />
         </VerticalStackLayout>
     </ScrollView>
