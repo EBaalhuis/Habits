@@ -10,6 +10,8 @@
             Spacing="25">
 
             <controls:HabitButton Habit="Gym" />
+            <controls:HabitButton Habit="Work at home" />
+            <controls:HabitButton Habit="Work at office" />
         </VerticalStackLayout>
     </ScrollView>
 
