@@ -18,7 +18,7 @@
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
 
             <Label
-                Text="v0.1"
+                Text="v0.2"
                 FontSize="10"
                 HorizontalOptions="Center" />
         </VerticalStackLayout>
