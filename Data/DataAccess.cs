@@ -76,4 +76,11 @@ public class DataAccess
             .GroupBy(entry => entry.Date)
             .ToDictionary(group => group.Key, group => group.ToList());
     }
+
+    public async Task<List<Habit>> GetHabits()
+    {
+        await Init();
+        if (Database is null) throw new InvalidOperationException("Database init failed");
+        return await Database.Table<Habit>().ToListAsync();
+    }
 }
