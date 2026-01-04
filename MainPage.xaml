@@ -17,6 +17,8 @@
             <controls:HabitButton Habit="Work at office" 
                                   Date="{Binding Source={x:Reference DatePicker}, Path=Date }" />
 
+            <controls:History />
+
             <Label
                 Text="v0.2"
                 FontSize="10"
