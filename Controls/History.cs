@@ -72,16 +72,23 @@ public partial class History : ContentView
 			}
     };
 
-    private static Label CreateDateLabel(List<HabitEntry> entries) => new()
+    private static Label CreateDateLabel(List<HabitEntry> entries)
 	{
-		Text = entries.First().Date.ToShortDateString(),
-        HorizontalOptions = LayoutOptions.Center,
-        VerticalOptions = LayoutOptions.Center
-    };
+		var date = entries.First().Date;
+        var label = new Label
+		{
+			Text = date.ToShortDateString(),
+			HorizontalOptions = LayoutOptions.Center,
+			VerticalOptions = LayoutOptions.Center
+		};
+
+		return WithGestureRecognizer(label, date);
+    }
 
 	private static VerticalStackLayout CreateHabitsLayout(List<HabitEntry> entries)
 	{
 		var habitsLayout = new VerticalStackLayout();
+
 		foreach (var entry in entries)
 		{
 			var habitLabel = new Label
@@ -90,8 +97,33 @@ public partial class History : ContentView
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center
 			};
-			habitsLayout.Children.Add(habitLabel);
+			habitLabel = WithGestureRecognizer(habitLabel, entry.Date);
+            habitsLayout.Children.Add(habitLabel);
 		}
+
 		return habitsLayout;
+    }
+
+	private static Label WithGestureRecognizer(Label label, DateTime date)
+	{
+		label.GestureRecognizers.Add(new TapGestureRecognizer
+		{
+			Command = new Command(() =>
+			{
+				// climb up the visual tree to find the containing page
+				var parent = label.Parent;
+				while (parent != null && parent is not ContentPage)
+				{
+					parent = parent.Parent;
+				}
+				if (parent is ContentPage page)
+				{
+					var datePicker = page.FindByName<DatePicker>("DatePicker");
+					datePicker?.Date = date;
+				}
+			})
+		});
+
+		return label;
     }
 }
