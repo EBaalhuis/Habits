@@ -27,7 +27,7 @@ public partial class HabitsPage : ContentPage
             var views = await LoadHabits();
 
             // Update UI on the main thread
-            Dispatcher.Dispatch(() =>
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 StackLayout.Children.Clear();
                 foreach (var view in views)
