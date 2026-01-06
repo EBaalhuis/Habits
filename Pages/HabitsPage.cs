@@ -24,13 +24,13 @@ public partial class HabitsPage : ContentPage
     {
         try
         {
-            var views = await LoadHabits();
+            var habitViews = await LoadHabits();
 
             // Update UI on the main thread
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 StackLayout.Children.Clear();
-                foreach (var view in views)
+                foreach (var view in habitViews)
                 {
                     StackLayout.Children.Add(view);
                 }
