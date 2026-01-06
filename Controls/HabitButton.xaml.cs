@@ -82,6 +82,19 @@ public partial class HabitButton : ContentView
     {
         Entry.Enabled = !Entry.Enabled;
 
+        if (Entry.Enabled) 
+        { 
+            var page = Application.Current?.Windows[0].Page;
+            if (page is not null)
+            {
+                var weightInput = await page.DisplayPromptAsync("Weight", "Weight in kgs:");
+                if (int.TryParse(weightInput, out var weight))
+                {
+                    Entry.WeightInKg = weight;
+                }
+            }
+        }
+
         try
         {
             await DataAccess.SaveHabitEntry(Entry);
