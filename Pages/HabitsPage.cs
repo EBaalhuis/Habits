@@ -12,7 +12,8 @@ public partial class HabitsPage : ContentPage
 	{
         StackLayout = new VerticalStackLayout
         {
-            Spacing = 10
+            Padding = 30,
+            Spacing = 10,
         };
 
         Content = StackLayout;
