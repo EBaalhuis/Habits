@@ -83,4 +83,11 @@ public class DataAccess
         if (Database is null) throw new InvalidOperationException("Database init failed");
         return await Database.Table<Habit>().ToListAsync();
     }
+
+    public async Task AddHabit(string name)
+    {
+        await Init();
+        if (Database is null) throw new InvalidOperationException("Database init failed");
+        await Database.InsertAsync(new Habit { Name = name });
+    }
 }
