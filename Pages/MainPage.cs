@@ -51,7 +51,7 @@ public partial class MainPage : ContentPage
 
             StackLayout.Children.Add(new Label
             {
-                Text = "v0.2",
+                Text = "v0.3",
                 FontSize = 10,
                 HorizontalOptions = LayoutOptions.Center
             });
