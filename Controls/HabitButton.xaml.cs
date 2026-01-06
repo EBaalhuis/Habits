@@ -29,8 +29,7 @@ public partial class HabitButton : ContentView
         nameof(Date),
         typeof(DateTime),
         typeof(HabitButton),
-        default(DateTime),
-        propertyChanged: OnDateChanged);
+        default(DateTime));
 
     public DateTime Date
     {
@@ -51,12 +50,11 @@ public partial class HabitButton : ContentView
         _ = LoadEntry();
     }
 
-    private static void OnDateChanged(BindableObject bindable, object oldValue, object newValue)
+    public async Task OnDateChanged(DateTime? date)
     {
-        if (bindable is HabitButton button)
-        {
-            _ = button.LoadEntry();
-        }
+        if (date is null) return;
+        Date = date.Value;
+        await LoadEntry();
     }
 
     private void OnButtonClicked(object? sender, EventArgs e)

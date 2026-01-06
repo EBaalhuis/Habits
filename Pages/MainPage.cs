@@ -37,7 +37,13 @@ public partial class MainPage : ContentPage
             var habits = (await DataAccess.GetHabits()).OrderBy(h => h.Name);
             foreach (var habit in habits)
             {
-                var button = new HabitButton() { DataAccess = DataAccess, HabitName = habit.Name ?? "" };
+                var button = new HabitButton() 
+                { 
+                    DataAccess = DataAccess, 
+                    Date = datePicker.Date ?? DateTime.Today,
+                    HabitName = habit.Name ?? ""
+                };
+                datePicker.DateSelected += async (s, e) => await button.OnDateChanged(e.NewDate);
                 StackLayout.Children.Add(button);
             }
 
