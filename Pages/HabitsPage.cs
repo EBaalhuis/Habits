@@ -10,7 +10,11 @@ public partial class HabitsPage : ContentPage
 
     public HabitsPage()
 	{
-        StackLayout = [];
+        StackLayout = new VerticalStackLayout
+        {
+            Spacing = 10
+        };
+
         Content = StackLayout;
     }
 
