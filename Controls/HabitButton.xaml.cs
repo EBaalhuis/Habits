@@ -13,7 +13,7 @@ public partial class HabitButton : ContentView
 
     public static event EventHandler? Toggled;
 
-    public static readonly BindableProperty HabitProperty = BindableProperty.Create(
+    public static readonly BindableProperty HabitNameProperty = BindableProperty.Create(
         nameof(HabitName),
         typeof(string),
         typeof(HabitButton),
@@ -21,8 +21,8 @@ public partial class HabitButton : ContentView
 
     public string HabitName
     {
-        get => (string)GetValue(HabitProperty);
-        set => SetValue(HabitProperty, value);
+        get => (string)GetValue(HabitNameProperty);
+        set => SetValue(HabitNameProperty, value);
     }
 
     public static readonly BindableProperty DateProperty = BindableProperty.Create(
