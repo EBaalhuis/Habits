@@ -34,6 +34,7 @@ public partial class HabitsPage : ContentPage
                 {
                     StackLayout.Children.Add(view);
                 }
+                StackLayout.Children.Add(GetAddHabitButton());
             });
         }
         catch (Exception)
@@ -51,5 +52,28 @@ public partial class HabitsPage : ContentPage
     private static Label CreateView(Habit habit)
     {
         return new Label { Text = habit.Name ?? "Unnamed Habit", HorizontalOptions = LayoutOptions.Center };
+    }
+
+    private Button GetAddHabitButton()
+    {
+        var button = new Button
+        {
+            Text = "Add Habit",
+            HorizontalOptions = LayoutOptions.Fill
+        };
+        button.Clicked += OnAddClicked;
+        return button;
+    }
+
+    private async void OnAddClicked(object? sender, EventArgs e)
+    {
+        var result = await DisplayPromptAsync("New Habit", "Name:");
+
+        if (!string.IsNullOrWhiteSpace(result))
+        {
+            var dataAccess = new DataAccess();
+            await dataAccess.AddHabit(result);
+            await LoadAndRenderHabits();
+        }
     }
 }
