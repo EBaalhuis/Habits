@@ -37,6 +37,9 @@ public partial class HabitButton : ContentView
         set => SetValue(DateProperty, value);
     }
 
+    private string GetButtonText() => $"{HabitName}{GetWeightDisplay()}";
+    private string GetWeightDisplay() => Entry.WeightInKg is null ? string.Empty : $" ({Entry.WeightInKg}kg)";
+
     public required DataAccess DataAccess { get; set; } = new();
 
     static Color ToggledOnColor => Colors.Orange;
@@ -48,6 +51,7 @@ public partial class HabitButton : ContentView
     {
         base.OnParentSet();
         _ = LoadEntry();
+        InnerButton.Text = GetButtonText();
     }
 
     public async Task OnDateChanged(DateTime? date)
@@ -80,8 +84,8 @@ public partial class HabitButton : ContentView
     {
         Entry.Enabled = !Entry.Enabled;
 
-        if (Entry.Enabled) 
-        { 
+        if (Entry.Enabled)
+        {
             var page = Application.Current?.Windows[0].Page;
             if (page is not null)
             {
@@ -92,6 +96,11 @@ public partial class HabitButton : ContentView
                 }
             }
         }
+        else
+        {
+            Entry.WeightInKg = null;
+        }
+
 
         try
         {
@@ -123,5 +132,6 @@ public partial class HabitButton : ContentView
     private void UpdateButton()
     {
         InnerButton.BorderColor = Entry.Enabled ? ToggledOnColor : ToggledOffColor;
+        InnerButton.Text = GetButtonText();
     }
 }

@@ -5,7 +5,7 @@
 
     <Button
         x:Name="InnerButton"
-        Text="{Binding HabitName}"
+        Text=""
         BorderWidth="2"
         BorderColor="Black"
         HorizontalOptions="Fill"
