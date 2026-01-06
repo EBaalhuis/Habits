@@ -1,7 +1,7 @@
 ﻿using Habits.Controls;
 using Habits.Data;
 
-namespace Habits;
+namespace Habits.Pages;
 
 public partial class MainPage : ContentPage
 {
@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
             var habits = (await DataAccess.GetHabits()).OrderBy(h => h.Name);
             foreach (var habit in habits)
             {
-                var button = new HabitButton() { DataAccess = DataAccess, HabitName = habit.Name };
+                var button = new HabitButton() { DataAccess = DataAccess, HabitName = habit.Name ?? "" };
                 StackLayout.Children.Add(button);
             }
 

@@ -9,7 +9,7 @@
     <TabBar>
         <ShellContent
             Title="Entries"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate local:Pages.MainPage}"
             Route="MainPage" />
 
         <ShellContent
