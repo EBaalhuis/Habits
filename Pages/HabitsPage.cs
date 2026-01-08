@@ -72,7 +72,7 @@ public partial class HabitsPage : ContentPage
 
     private async void OnAddClicked(object? sender, EventArgs e)
     {
-        var result = await DisplayPromptAsync("New Habit", "Name:");
+        var result = await DisplayPromptAsync("New Habit", "Name:", keyboard: Keyboard.Create(KeyboardFlags.CapitalizeSentence));
 
         if (!string.IsNullOrWhiteSpace(result))
         {
