@@ -6,6 +6,7 @@ namespace Habits.Pages;
 public partial class MainPage : ContentPage
 {
     public DataAccess DataAccess { get; set; } = new();
+    public DatePicker DatePicker { get; } = new();
     private VerticalStackLayout StackLayout { get; }
 
     public MainPage()
@@ -30,9 +31,7 @@ public partial class MainPage : ContentPage
         try
         {
             StackLayout.Children.Clear();
-
-            var datePicker = new DatePicker();
-            StackLayout.Children.Add(datePicker);
+            StackLayout.Children.Add(DatePicker);
 
             var habits = (await DataAccess.GetHabits()).OrderBy(h => h.Name);
             foreach (var habit in habits)
@@ -40,10 +39,10 @@ public partial class MainPage : ContentPage
                 var button = new HabitButton() 
                 { 
                     DataAccess = DataAccess, 
-                    Date = datePicker.Date ?? DateTime.Today,
+                    Date = DatePicker.Date ?? DateTime.Today,
                     HabitName = habit.Name ?? ""
                 };
-                datePicker.DateSelected += async (s, e) => await button.OnDateChanged(e.NewDate);
+                DatePicker.DateSelected += async (s, e) => await button.OnDateChanged(e.NewDate);
                 StackLayout.Children.Add(button);
             }
 

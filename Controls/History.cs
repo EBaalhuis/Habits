@@ -1,5 +1,6 @@
 using Habits.Data;
 using Habits.Models;
+using Habits.Pages;
 
 namespace Habits.Controls;
 
@@ -130,10 +131,9 @@ public partial class History : ContentView
 				{
 					parent = parent.Parent;
 				}
-				if (parent is ContentPage page)
+				if (parent is MainPage page)
 				{
-					var datePicker = page.FindByName<DatePicker>("DatePicker");
-					datePicker?.Date = date;
+					page.DatePicker.Date = date;
 				}
 			})
 		});
