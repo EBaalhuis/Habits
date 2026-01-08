@@ -108,7 +108,7 @@ public partial class History : ContentView
 		{
 			var habitLabel = new Label
 			{
-				Text = $"{entry.HabitName}",
+				Text = $"{entry.HabitName} - {entry.WeightInKg}kg",
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center
 			};
