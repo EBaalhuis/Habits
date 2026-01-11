@@ -17,7 +17,11 @@ public partial class MainPage : ContentPage
             Spacing = 25
         };
 
-        Content = StackLayout;
+        Content = new ScrollView()
+        {
+            Content = StackLayout,
+            Margin = 20,
+        };
     }
 
     protected override void OnAppearing()
