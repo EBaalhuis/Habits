@@ -1,5 +1,6 @@
 ﻿using Habits.Controls;
 using Habits.Data;
+using Habits.Util;
 
 namespace Habits.Pages;
 
@@ -54,7 +55,7 @@ public partial class MainPage : ContentPage
 
             StackLayout.Children.Add(new Label
             {
-                Text = AppInfo.VersionString,
+                Text = AppInfo.VersionString.ToShortVersionString(),
                 FontSize = 10,
                 HorizontalOptions = LayoutOptions.Center
             });
