@@ -1,0 +1,1 @@
+How to publish ad hoc: https://learn.microsoft.com/en-us/dotnet/maui/android/deployment/publish-ad-hoc?view=net-maui-10.0
