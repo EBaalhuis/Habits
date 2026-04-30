@@ -133,6 +133,7 @@ public partial class HabitButton : ContentView
     private void UpdateButton()
     {
         InnerButton.BorderColor = Entry.Enabled ? ToggledOnColor : ToggledOffColor;
+        InnerButton.BorderWidth = Entry.Enabled ? 2 : 1;
         InnerButton.Text = GetButtonText();
     }
 }
