@@ -38,7 +38,12 @@ public partial class HabitButton : ContentView
     }
 
     private string GetButtonText() => $"{HabitName}{GetWeightDisplay()}";
-    private string GetWeightDisplay() => Entry.WeightInKg is null ? string.Empty : $" ({Entry.WeightInKg}kg)";
+    private string GetWeightDisplay() 
+    {
+        if (Entry.WeightInKg is not null) return $" ({Entry.WeightInKg}kg)";
+        
+        return $" ({PreviousEntry?.WeightInKg}kg)";
+    } 
 
     public required DataAccess DataAccess { get; set; } = new();
 
@@ -46,6 +51,7 @@ public partial class HabitButton : ContentView
     static Color ToggledOffColor => Colors.Black;
 
     private HabitEntry Entry { get; set; } = new();
+    private HabitEntry? PreviousEntry { get; set; }
 
     protected override void OnParentSet()
     {
@@ -72,6 +78,7 @@ public partial class HabitButton : ContentView
         {
             if (string.IsNullOrEmpty(HabitName)) return;
             Entry = await GetEntryFromDatabase();
+            PreviousEntry = await GetPreviousEntryFromDatabase();
             UpdateButton();
         }
         catch (Exception ex)
@@ -127,6 +134,20 @@ public partial class HabitButton : ContentView
         {
             System.Diagnostics.Debug.WriteLine($"Error retrieving habit entry: {ex.Message}");
             return new HabitEntry { HabitName = HabitName, Date = Date };
+        }
+    }
+
+    private async Task<HabitEntry?> GetPreviousEntryFromDatabase()
+    {
+        try
+        {
+            var entry = await DataAccess.GetPreviousHabitEntry(HabitName, Date);
+            return entry;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error retrieving habit entry: {ex.Message}");
+            return null;
         }
     }
 

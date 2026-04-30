@@ -41,6 +41,18 @@ public class DataAccess
             .FirstOrDefaultAsync();
     }
 
+    public async Task<HabitEntry> GetPreviousHabitEntry(string habit, DateTime date)
+    {
+        await Init();
+        if (Database is null) throw new InvalidOperationException("Database init failed");
+
+        return await Database.Table<HabitEntry>()
+            .Where(rec => rec.HabitName == habit)
+            .Where(rec => rec.Date < date)
+            .OrderByDescending(rec => rec.Date)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<int> SaveHabitEntry(HabitEntry entry)
     {
         await Init();
