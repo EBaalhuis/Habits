@@ -15,7 +15,7 @@ public partial class MainPage : ContentPage
         StackLayout = new VerticalStackLayout
         {
             Padding = 30,
-            Spacing = 25
+            Spacing = 5
         };
 
         Content = new ScrollView()
