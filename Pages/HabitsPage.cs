@@ -50,7 +50,7 @@ public partial class HabitsPage : ContentPage
 
     private async Task<List<IView>> LoadHabits()
     {
-        var habits = (await DataAccess.GetHabits()).OrderBy(h => h);
+        var habits = (await DataAccess.GetHabits()).OrderBy(h => h.Name);
         return [.. habits.Select(CreateView)];
     }
 
