@@ -96,8 +96,12 @@ public partial class HabitButton : ContentView
             var page = Application.Current?.Windows[0].Page;
             if (page is not null)
             {
-                var weightInput = await page.DisplayPromptAsync("Weight", "Weight in kgs:",
+                var weightInput = await page.DisplayPromptAsync(
+                    title: "Weight", 
+                    message: "Weight in kgs:", 
+                    initialValue: PreviousEntry?.WeightInKg?.ToString(), 
                     keyboard: Keyboard.Numeric);
+
                 if (int.TryParse(weightInput, out var weight))
                 {
                     Entry.WeightInKg = weight;
