@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
     {
         StackLayout = new VerticalStackLayout
         {
-            Padding = 30,
+            Padding = new(horizontalSize: 30, verticalSize: 5),
             Spacing = 5
         };
 
