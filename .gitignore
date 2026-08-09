@@ -386,4 +386,9 @@ temp
 
 # TypeScript source map files (generated artifacts)
 # Note: CSS map files in templates (e.g., bootstrap) are intentionally tracked
+
+# Ad hoc Android publishing: signing keystore and distributable output
+*.keystore
+*.jks
+/dist/
 *.js.map
